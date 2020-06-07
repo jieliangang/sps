@@ -7,13 +7,29 @@
     <script src="script.js"></script>
   </head>
   <body>
-    <!-- <div id="content">
-      <h1>Jie Liang's Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
-    </div> -->
+    
+    <header>
+        <a id="home" href="#intro">Home</a>
+    </header>
+
+    <ul id="sidebar">
+        <li id="side-github">
+            <a>
+                <img src="images/github.svg"/>
+            </a>
+        </li>
+        <li id="side-linkedin">
+            <a>
+                <img src="images/linkedin.svg"/>
+            </a>
+        </li>
+        <li id="side-email">
+            <a>
+                <img src="images/mail.svg"/>
+            </a>
+        </li>
+    </ul>
+
 
     <div id="intro">
         <h1>Hello there, I'm</h1>
@@ -209,6 +225,48 @@
 
         </div>
     </div>
+
+    <div id="gallery">
+        <h1>Gallery</h1>
+        <h3>Here are some pictures I took during my exchange programme in the United States back in 2019.</h3>
+        <div id="gallery-wrapper">
+            <div id="gallery-container">
+                <img src="images/beach.jpeg"/>
+                <img src="images/bridge.jpeg"/>
+                <img src="images/brooklyn.jpeg"/>
+                <img src="images/chicago.jpeg"/>
+                <img src="images/grandcanyon.jpeg"/>
+                <img src="images/mich.jpeg"/>
+                <img src="images/newyork.jpeg"/>
+                <img src="images/timesquare.jpeg"/>
+                <img src="images/yosemite.jpeg"/>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="contact">
+        <h2 id="contact-heading">Contact</h2>
+        <h3 id="contact-text">Have a question or want to have a chat?</h3>
+
+        <div id="contact-section">
+            <a id="contact-email" href="mailto:jang@sps-program.com">Get in Touch</a>
+        </div>
+    </div>
+
+
+    <footer>
+        <div id="footer-links">
+            <a class="footer-link">
+                <img src="images/github.svg" />
+            </a>
+            <a class="footer-link">
+                <img src="images/linkedin.svg" />
+            </a>
+        </div>
+        <p> Designed and Built by <a>Jie Liang Ang</a> © 2020</p>
+        <p>Google SPS</p>
+    </footer>
 
     <script>updateJob(0)</script>
   </body>
