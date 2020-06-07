@@ -32,6 +32,7 @@ header {
     right: 0;
     left: 0;
     padding: 1rem 3rem;
+    margin: 0;
     height: 4.5rem;
     z-index: 10;
     width: 100vw;
@@ -54,7 +55,7 @@ header a:hover {
 #sidebar {
     position: fixed;
     bottom: 0;
-    right: 80px;
+    right: 50px;
 
     display: flex;
     flex-direction: column;
@@ -70,7 +71,7 @@ header a:hover {
     content: "";
     display: block;
     width: 2px;
-    height: 100px;
+    height: 120px;
     margin: 0 auto;
     background-color: #434c5e;
 }
@@ -112,6 +113,7 @@ header a:hover {
 #intro h3 {
     font-size: 1.4rem;
     max-width: 550px;
+    font-weight: normal;
 }
 
 #intro a {
@@ -364,6 +366,7 @@ header a:hover {
 
 #gallery {
     padding: 0 100px;
+    margin-top: 100px;
 }
 
 #gallery h1 {
@@ -392,6 +395,10 @@ header a:hover {
     width: 250px;
     height: 250px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#gallery-container img:hover {
+    transform: translate(0px, -5px);
 }
 
 #contact {
@@ -471,17 +478,59 @@ footer p {
     padding: 0;
 }
 
-@media screen and (max-width: 900px) {
+/* @media screen and (max-width: 768px) {
     #sidebar {
         display: none;
     }
 
-    
+    #about-content {
+        flex-direction: column;
+    }
+
+    #project-lists {
+        grid-template-columns: 1fr;
+    }
+} */
+
+/* @media screen and (max-width: 1360px) {
+
+    #project-lists {
+        grid-template-columns: 1fr 1fr;
+    }
+
+} */
+
+/* @media screen and (max-width: 900) {
+    #sidebar {
+        display: none;
+    }
+
+    #about-content {
+        flex-direction: column;
+    }
+
+    #project-lists {
+        grid-template-columns: 1fr;
+    }
+
+    #gallery-container {
+        display: grid;
+        grid-template-columns: 150px 150px 150px;
+        grid-row-gap: 10px;
+        grid-column-gap: 10px;
+        margin: 50px 0;
+    }
+
+    #gallery-container img {
+        width: 150px;
+        height: 150px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
     #footer-links {
         display: block;
         padding: 0;
         margin: 5px 0;
     }
-}
+} */
 
