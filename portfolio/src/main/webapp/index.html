@@ -40,7 +40,7 @@
                     <li>Swift</li>
                     <li>C++</li>
                     <li>React/Redux</li>
-                    <li>Apache Flink</li>
+                    <li>Flink</li>
                     <li>HTML/CSS</li>
                 </ul>
             </div>
@@ -48,10 +48,168 @@
             <div id="about-right">
                 <img src="images/potrait.jpeg"/>
             </div>
+        </div>
+    </div>
 
+    <div id="experience">
+        <h1>Work Experience</h1>
+        <div id="container">
+            <ul id="tab-section">
+                <button class="jobTab" id="job0" onclick="updateJob(0)">Goldman Sachs</button>
+                <button class="jobTab" id="job1" onclick="updateJob(1)">NUS</button>
+                <button class="jobTab" id="job2" onclick="updateJob(2)">Sea Group</button>
+                <button class="jobTab" id="job3" onclick="updateJob(3)">Grab-NUS AI Lab</button>
+                <button class="jobTab" id="job4" onclick="updateJob(4)">Intel</button>
+            </ul>
+            <div id="content-section">
+                <div id="content">
+                    <h4 id="job-title">_</h4>
+                    <a id="job-company"> @ _</a>
+                    <h5 id="job-duration">_ to _</h5>
+                    <p id="job-description"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="projects">
+        <h1>Projects</h1>
+        <div id="projects-list">
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">Pneunomia Classifier</h4>
+                    <a class="project-github">
+                        <img src="images/github.svg" />
+                    </a>
+                </div>
+                <p class="project-description">Inception CNN model that classifies viral pneunomia from X-ray images.</p>
+                <ul class="stack-list">
+                    <li class="stack">Tensorflow</li>
+                    <li class="stack">Python</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">Database Implementation</h4>
+                    <a class="project-github">
+                        <img src="images/github.svg" />
+                    </a>
+                </div>
+                <p class="project-description">Implemented Sort Merge Join operator and System R optimizer for CS3223 module.</p>
+                <ul class="stack-list">
+                    <li class="stack">Java</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">PartyQueue</h4>
+                    <a class="project-github">
+                        <img src="images/github.svg" />
+                    </a>
+                </div>
+                <p class="project-description">A web player that automatically schedules and plays the most voted songs.</p>
+                <ul class="stack-list">
+                    <li class="stack">React</li>
+                    <li class="stack">Spring</li>
+                    <li class="stack">Spotify API</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">TraV</h4>
+                    <a class="project-github">
+                        <img src="images/github.svg" />
+                    </a>
+                </div>
+                <p class="project-description">An interactive trajectory exploration system which applies parallel computation and the Hidden Markov Model to plot and explore trajectories via an interactive GUI.</p>
+                <ul class="stack-list">
+                    <li class="stack">Flink</li>
+                    <li class="stack">Java</li>
+                    <li class="stack">SwiftUI</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">Dash</h4>
+                    <a class="project-github">
+                        <img src="images/github.svg" />
+                    </a>
+                </div>
+                <p class="project-description">A truly endless running iOS game featuring multiplayer mode and global high score through procedurally generated landscapes and obstacles.</p>
+                <ul class="stack-list">
+                    <li class="stack">Swift</li>
+                    <li class="stack">SpriteKit</li>
+                    <li class="stack">Firebase</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">Paper Blast Saga</h4>
+                    <a class="project-github">
+                        <img src="images/github.svg" />
+                    </a>
+                </div>
+                <p class="project-description">A bubble shooter iOS game with my own custom physics engine built from scatch. Lever designer included.</p>
+                <ul class="stack-list">
+                    <li class="stack">Swift</li>
+                    <li class="stack">UIKit</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">Pet Caring</h4>
+                    <a class="project-github">
+                        <img src="images/github.svg" />
+                    </a>
+                </div>
+                <p class="project-description">A web application that matches pet owners with pets to caretakers, via a bidding system, to allow pet owners to travel while they leave their pets to the caretakers.</p>
+                <ul class="stack-list">
+                    <li class="stack">MySQL</li>
+                    <li class="stack">NodeJS</li>
+                    <li class="stack">React</li>
+                    <li class="stack">Redux</li>
+                </ul>
+            </div>    
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">ProManage</h4>
+                    <a class="project-github">
+                        <img src="images/github.svg" />
+                    </a>
+                </div>
+                <p class="project-description">A command-line interface Java desktop application to organise corporate meetings and schedule.</p>
+                <ul class="stack-list">
+                    <li class="stack">Java</li>
+                    <li class="stack">JavaFX</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">CalendarSync</h4>
+                    <a class="project-github">
+                        <img src="images/github.svg" />
+                    </a>
+                </div>
+                <p class="project-description">A social calendar Android application with personal calendar, event chat groups and profile customization, allowing users to schedule and organize events with their contacts easily.</p>
+                <ul class="stack-list">
+                    <li class="stack">Java</li>
+                    <li class="stack">Android Studio</li>
+                    <li class="stack">Firebase</li>
+                </ul>
+            </div>              
 
         </div>
-
     </div>
+
+    <script>updateJob(0)</script>
   </body>
 </html>
