@@ -1,3 +1,8 @@
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
 #content {
   margin-left: auto;
   margin-right: auto;
@@ -7,3 +12,110 @@
 #greeting-container {
   margin-top: 20px;
 }
+
+#intro {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 100px;
+}
+
+#intro h1 {
+    font-size: 1.5rem;
+}
+
+#intro h2 {
+    display: inline-block;
+    font-size: 3rem;
+    margin: 0;
+}
+
+#intro h3 {
+    font-size: 1.4rem;
+    max-width: 550px;
+}
+
+#intro a {
+    font-size: 1.3rem;
+    padding: 0.7rem 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+#intro a:hover {
+    border-color: red;
+}
+
+
+#about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 100px
+}
+
+#about-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#about-left {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-right: 50px;
+}
+
+#about-right {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#about p {
+    font-size: 1.2rem;
+}
+
+#about img {
+    width: 250px;
+    height: 250px;
+}
+
+#about ul {
+    font-size: 1.2rem;
+    list-style: none;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+    margin: 0;
+}
+
+#about li {
+    width: 50%;
+    margin: 0;
+}
+
+#about li::before {
+    content: "↬";
+    position: relative;
+    left: 0;
+    padding-right: 10px;
+    line-height: 12px;
+}
+
+
+
+
