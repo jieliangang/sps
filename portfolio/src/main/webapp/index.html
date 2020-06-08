@@ -2,17 +2,271 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>Jie Liang's Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
   </head>
-  <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+  <body onload="updateJob(0)">
+    
+    <header>
+        <a id="home" href="#intro">Home</a>
+    </header>
+
+    <ul id="sidebar">
+        <li id="side-github">
+            <a href="https://github.com/jieliangang" target="_blank">
+                <img src="images/github.svg"/>
+            </a>
+        </li>
+        <li id="side-linkedin">
+            <a href="https://www.linkedin.com/in/jieliangang/" target="_blank">
+                <img src="images/linkedin.svg"/>
+            </a>
+        </li>
+        <li id="side-email">
+            <a href="mailto:jang@sps-program.com">
+                <img src="images/mail.svg"/>
+            </a>
+        </li>
+    </ul>
+
+
+    <div id="intro">
+        <h1>Hello there, I'm</h1>
+        <h2>Jie Liang Ang</h2>
+        <h3>I am an aspiring software engineer based in Singapore who possess great interest in full stack development and database systems.</h3>
+        <a href="mailto:jang@sps-program.com">Say Hello</a>
     </div>
+
+    <div id="about">
+        <h1>About Me</h1>
+        <div id="about-content">
+            <div id="about-left">
+                <p>Hello! I am a Third Year Computer Engineering undergraduate studying at the <a>National University of Singapore (NUS)</a>.
+                    I love solving challenging technical problems and developing efficient websites and software. I am specialising in database systems and machine learning.
+                </p>
+
+                <p>I spend my free time playing Animal Crossing and browsing Reddit and Youtube. 
+                    I am a huge football fan and also enjoy watching Korean variety shows such as Running Man.
+                </p>
+
+                <p>Here are a few technologies I have recently been working with:</p>
+                <ul>
+                    <li>Java</li>
+                    <li>Swift</li>
+                    <li>C++</li>
+                    <li>React/Redux</li>
+                    <li>Flink</li>
+                    <li>HTML/CSS</li>
+                </ul>
+            </div>
+
+            <div id="about-right">
+                <img src="images/potrait.jpeg"/>
+            </div>
+        </div>
+    </div>
+
+    <div id="experience">
+        <h1>Work Experience</h1>
+        <div id="container">
+            <ul id="tab-section">
+                <button class="jobTab" id="job0" onclick="updateJob(0)">Goldman Sachs</button>
+                <button class="jobTab" id="job1" onclick="updateJob(1)">NUS</button>
+                <button class="jobTab" id="job2" onclick="updateJob(2)">Sea Group</button>
+                <button class="jobTab" id="job3" onclick="updateJob(3)">Grab-NUS AI Lab</button>
+                <button class="jobTab" id="job4" onclick="updateJob(4)">Intel</button>
+            </ul>
+            <div id="content-section">
+                <div id="content">
+                    <h4 id="job-title">_</h4>
+                    <a id="job-company"> @ _</a>
+                    <h5 id="job-duration">_ to _</h5>
+                    <p id="job-description"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="projects">
+        <h1>Projects</h1>
+        <div id="projects-list">
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">Pneunomia Classifier</h4>
+                    <a class="project-github">
+                        <!-- <img src="images/github.svg" /> -->
+                    </a>
+                </div>
+                <p class="project-description">Inception CNN model that classifies viral pneunomia from X-ray images.</p>
+                <ul class="stack-list">
+                    <li class="stack">Tensorflow</li>
+                    <li class="stack">Python</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">Database Implementation</h4>
+                    <a class="project-github">
+                        <!-- <img src="images/github.svg" /> -->
+                    </a>
+                </div>
+                <p class="project-description">Implemented Sort Merge Join operator and System R (Dynamic Programming) optimizer.</p>
+                <ul class="stack-list">
+                    <li class="stack">Java</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">PartyQueue</h4>
+                    <a class="project-github">
+                        <img src="images/github.svg" />
+                    </a>
+                </div>
+                <p class="project-description">A web player that automatically schedules and plays the most voted songs.</p>
+                <ul class="stack-list">
+                    <li class="stack">React</li>
+                    <li class="stack">Spring</li>
+                    <li class="stack">Spotify API</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">TraV</h4>
+                    <a class="project-github">
+                        <!-- <img src="images/github.svg" /> -->
+                    </a>
+                </div>
+                <p class="project-description">An interactive trajectory exploration system which applies parallel computation and the Hidden Markov Model to plot and explore trajectories via an interactive GUI.</p>
+                <ul class="stack-list">
+                    <li class="stack">Flink</li>
+                    <li class="stack">Java</li>
+                    <li class="stack">SwiftUI</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">Dash</h4>
+                    <a class="project-github" href="https://github.com/cs3217-dash/dash" target="_blank">
+                        <img src="images/github.svg" />
+                    </a>
+                </div>
+                <p class="project-description">A truly endless running iOS game featuring multiplayer mode and global high score through procedurally generated landscapes and obstacles.</p>
+                <ul class="stack-list">
+                    <li class="stack">Swift</li>
+                    <li class="stack">SpriteKit</li>
+                    <li class="stack">Firebase</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">Paper Blast Saga</h4>
+                    <a class="project-github" href="https://github.com/jieliangang/paper-blast" target="_blank">
+                        <img src="images/github.svg" />
+                    </a>
+                </div>
+                <p class="project-description">A bubble shooter iOS game with my own custom physics engine built from scatch. Lever designer included.</p>
+                <ul class="stack-list">
+                    <li class="stack">Swift</li>
+                    <li class="stack">UIKit</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">Pet Caring</h4>
+                    <a class="project-github" href="https://github.com/jieliangang/PET_CARING" target="_blank">
+                        <img src="images/github.svg" />
+                    </a>
+                </div>
+                <p class="project-description">A web application that matches pet owners with pets to caretakers, via a bidding system, to allow pet owners to travel while they leave their pets to the caretakers.</p>
+                <ul class="stack-list">
+                    <li class="stack">MySQL</li>
+                    <li class="stack">NodeJS</li>
+                    <li class="stack">React</li>
+                    <li class="stack">Redux</li>
+                </ul>
+            </div>    
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">ProManage</h4>
+                    <a class="project-github" href="https://github.com/jieliangang/promanage" target="_blank">
+                        <img src="images/github.svg" />
+                    </a>
+                </div>
+                <p class="project-description">A command-line interface Java desktop application to organise corporate meetings and schedule.</p>
+                <ul class="stack-list">
+                    <li class="stack">Java</li>
+                    <li class="stack">JavaFX</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h4 class="project-title">CalendarSync</h4>
+                    <a class="project-github" href="https://github.com/jieliangang/calendar-sync" target="_blank">
+                        <img src="images/github.svg" />
+                    </a>
+                </div>
+                <p class="project-description">A social calendar Android application with personal calendar, event chat groups and profile customization, allowing users to schedule and organize events with their contacts easily.</p>
+                <ul class="stack-list">
+                    <li class="stack">Java</li>
+                    <li class="stack">Android Studio</li>
+                    <li class="stack">Firebase</li>
+                </ul>
+            </div>              
+
+        </div>
+    </div>
+
+    <div id="gallery">
+        <h1>Gallery</h1>
+        <h3>Here are some pictures I took during my exchange programme in the United States back in 2019.</h3>
+        <div id="gallery-wrapper">
+            <div id="gallery-container">
+                <img src="images/beach.jpeg"/>
+                <img src="images/bridge.jpeg"/>
+                <img src="images/brooklyn.jpeg"/>
+                <img src="images/chicago.jpeg"/>
+                <img src="images/grandcanyon.jpeg"/>
+                <img src="images/mich.jpeg"/>
+                <img src="images/newyork.jpeg"/>
+                <img src="images/timesquare.jpeg"/>
+                <img src="images/yosemite.jpeg"/>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="contact">
+        <h2 id="contact-heading">Contact</h2>
+        <h3 id="contact-text">Have a question or want to have a chat?</h3>
+
+        <div id="contact-section">
+            <a id="contact-email" href="mailto:jang@sps-program.com">Get in Touch</a>
+        </div>
+    </div>
+
+
+    <footer>
+        <div id="footer-links">
+            <a class="footer-link" href="https://github.com/jieliangang
+            " target="_blank">
+                <img src="images/github.svg" />
+            </a>
+            <a class="footer-link" href="https://www.linkedin.com/in/jieliangang/" target="_blank">
+                <img src="images/linkedin.svg" />
+            </a>
+        </div>
+        <p> Designed and Built by <a href="#intro">Jie Liang Ang</a> © 2020</p>
+        <p>Google SPS 2020. Optimised for Desktop view.</p>
+    </footer>
   </body>
 </html>
