@@ -22,7 +22,6 @@ function updateJob(index) {
         tabs[i].style.borderColor = "gray"
     }
 
- 
     switch(index) {
         case 0:
             document.getElementById("job-title").innerHTML = "Software Engineer Intern"
@@ -68,13 +67,4 @@ function updateJob(index) {
         default:
 
     }
-}
-
-/**
- * Fetches hello quote from the server and adds it to the DOM.
- */
-async function getHelloQuote() {
-    const response = await fetch('/data');
-    const quote = await response.text();
-    document.getElementById("hello-container").innerHTML = quote;
 }
