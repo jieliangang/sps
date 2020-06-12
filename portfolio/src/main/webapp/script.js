@@ -79,11 +79,11 @@ async function fetchComments() {
     const commentsContainer = document.getElementById('comments-container');
     commentsContainer.innerHTML = '';
 
-    for(var i = 0; i < comments.length; i++) {
+    comments.forEach( comment => {
         commentsContainer.appendChild(
-            createListElement(comments[i])
+            createListElement(comment)
         );
-    }
+    });
 }
 
 /** Creates an <li> element containing text. */
