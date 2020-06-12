@@ -27,16 +27,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  private List<String> comments;
+  private List<String> comments = new ArrayList<>();;
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
-    comments = new ArrayList<>();
-    comments.add("Hello there!");
-    comments.add("How are you?");
-    comments.add("The weather is nice.");
-
     String json = convertToJsonUsingGson(comments);
 
     // Send the JSON as the response
@@ -44,11 +38,30 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String comment = getComment(request);
+    if(isValidComment(comment)) {
+        comments.add(comment);
+    }
+    response.sendRedirect("/#comments");
+  }
+
   private String convertToJsonUsingGson(List<String> comments) {
     Gson gson = new Gson();
     String json = gson.toJson(comments);
     return json;
   }
+
+  private String getComment(HttpServletRequest request) {
+      String commentString = request.getParameter("comment");
+      return commentString;
+  }
+
+  private Boolean isValidComment(String comment) {
+      // Check if string is not empty or contains only whitespace
+      return comment.trim().length() > 0;
+  } 
 }
 
 
