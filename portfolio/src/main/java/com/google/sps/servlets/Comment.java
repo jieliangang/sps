@@ -1,5 +1,6 @@
 package com.google.sps.servlets;
 
+/** Comment describes comment posted on the portfolio website including username and published date**/
 public class Comment {
     public String username ="";
     public String text = "";

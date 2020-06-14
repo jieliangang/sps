@@ -76,8 +76,6 @@ async function fetchComments() {
     const response = await fetch('/data');
     const comments = await response.json();
 
-    console.log(comments);
-
     const commentsContainer = document.getElementById('comments-container');
     commentsContainer.innerHTML = '';
 
