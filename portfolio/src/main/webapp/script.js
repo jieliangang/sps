@@ -22,7 +22,6 @@ function updateJob(index) {
         tabs[i].style.borderColor = "gray"
     }
 
- 
     switch(index) {
         case 0:
             document.getElementById("job-title").innerHTML = "Software Engineer Intern"
@@ -71,10 +70,25 @@ function updateJob(index) {
 }
 
 /**
- * Fetches hello quote from the server and adds it to the DOM.
+ * Fetches comments from the servers and adds them to the DOM.
  */
-async function getHelloQuote() {
+async function fetchComments() {
     const response = await fetch('/data');
-    const quote = await response.text();
-    document.getElementById("hello-container").innerHTML = quote;
+    const comments = await response.json();
+
+    const commentsContainer = document.getElementById('comments-container');
+    commentsContainer.innerHTML = '';
+
+    comments.forEach( comment => {
+        commentsContainer.appendChild(
+            createListElement(comment)
+        );
+    });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }

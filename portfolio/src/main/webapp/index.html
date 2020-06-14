@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
   </head>
-  <body onload="updateJob(0);getHelloQuote();">
+  <body onload="updateJob(0);fetchComments();">
     
     <header>
         <a id="home" href="#intro">Home</a>
@@ -255,7 +255,14 @@
     </div>
 
     <div id="comments">
-        <div id="hello-container"></div>
+
+        <form action="/data" method="POST"> 
+            <input type="text" name="comment" value=""/>
+            <input type="submit" />
+        </form>
+
+        <h1>Comments</h1>
+        <ul id="comments-container"></ul>
     </div>
 
 
