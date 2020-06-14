@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,6 +47,15 @@ public class DataServlet extends HttpServlet {
     Comment comment = getComment(request);
     if(isValidComment(comment)) {
         comments.add(comment);
+
+        // Store comment entity in Datastore
+        Entity commentEntity = new Entity("Comment");
+        commentEntity.setProperty("username", comment.getUsername());
+        commentEntity.setProperty("text", comment.getText());
+        commentEntity.setProperty("timestamp", comment.getTimestamp());
+
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        datastore.put(commentEntity);
     }
     response.sendRedirect("/#comments");
   }
@@ -58,6 +70,10 @@ public class DataServlet extends HttpServlet {
       String usernameString = request.getParameter("username");
       String commentString = request.getParameter("comment");
 
+      if(usernameString.trim().length() <= 0) {
+          usernameString = "Anonymous";
+      }
+
       Date date = new Date();
       long time = date.getTime();
 
@@ -67,7 +83,8 @@ public class DataServlet extends HttpServlet {
 
   private Boolean isValidComment(Comment comment) {
       // Check if username and text is not empty or contains only whitespace
-      return comment.text.trim().length() > 0 && comment.username.trim().length() > 0;
+      return comment.getText().trim().length() > 0
+              && comment.getUsername().trim().length() > 0;
   } 
 }
 
