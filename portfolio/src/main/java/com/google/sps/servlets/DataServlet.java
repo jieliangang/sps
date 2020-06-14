@@ -17,6 +17,7 @@ package com.google.sps.servlets;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  private List<String> comments = new ArrayList<>();;
+  private List<Comment> comments = new ArrayList<>();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -40,27 +41,33 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String comment = getComment(request);
+    Comment comment = getComment(request);
     if(isValidComment(comment)) {
         comments.add(comment);
     }
     response.sendRedirect("/#comments");
   }
 
-  private String convertToJsonUsingGson(List<String> comments) {
+  private String convertToJsonUsingGson(List<Comment> comments) {
     Gson gson = new Gson();
     String json = gson.toJson(comments);
     return json;
   }
 
-  private String getComment(HttpServletRequest request) {
+  private Comment getComment(HttpServletRequest request) {
+      String usernameString = request.getParameter("username");
       String commentString = request.getParameter("comment");
-      return commentString;
+
+      Date date = new Date();
+      long time = date.getTime();
+
+      Comment comment = new Comment(usernameString, commentString, time);
+      return comment;
   }
 
-  private Boolean isValidComment(String comment) {
-      // Check if string is not empty or contains only whitespace
-      return comment.trim().length() > 0;
+  private Boolean isValidComment(Comment comment) {
+      // Check if username and text is not empty or contains only whitespace
+      return comment.text.trim().length() > 0 && comment.username.trim().length() > 0;
   } 
 }
 
