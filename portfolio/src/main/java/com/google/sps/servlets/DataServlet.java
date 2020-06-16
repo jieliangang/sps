@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that handles fetching and posting of comments */
-@WebServlet("/data")
+@WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
   DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -38,11 +38,12 @@ public class DataServlet extends HttpServlet {
 
     List<Comment> comments = new ArrayList<>();
     for(Entity entity: results.asIterable()) {
+        long id = entity.getKey().getId();
         String username = (String) entity.getProperty("username");
         String text = (String) entity.getProperty("text");
         long timestamp = (long) entity.getProperty("timestamp");
 
-        Comment comment = new Comment(username, text, timestamp);
+        Comment comment = new Comment(id, username, text, timestamp);
         comments.add(comment);
     }
 
