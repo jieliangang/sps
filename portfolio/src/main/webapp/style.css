@@ -97,7 +97,7 @@ header a:hover {
     justify-content: center;
     align-items: flex-start;
 
-    padding: 0 100px;
+    padding: 0 200px;
 }
 
 #intro h1 {
@@ -138,7 +138,7 @@ header a:hover {
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
-    padding: 0 100px
+    padding: 0 200px
 }
 
 #about h1 {
@@ -208,7 +208,7 @@ header a:hover {
     align-items: flex-start;
     min-height: 100vh;
     margin: 0 70px;
-    padding: 0 100px
+    padding: 0 200px
 }
 
 #experience h1 {
@@ -300,7 +300,7 @@ header a:hover {
 }
 
 #projects {
-    padding: 0 100px; 
+    padding: 0 200px;
 }
 
 #projects h1 {
@@ -422,7 +422,7 @@ header a:hover {
 #contact-section {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
 }
 
 #contact-email {
@@ -437,6 +437,69 @@ header a:hover {
 #contact-email:hover {
     border-color: #5e81ac;
     color: #5e81ac;
+}
+
+#comments {
+    padding: 0 200px;
+    margin: 100px 0;
+    min-height: 100vh;
+}
+
+#comments h1 {
+    font-size: 1.4rem;
+}
+
+#comments input[type=text] {
+    padding: 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    display: block;
+}
+
+#comments input[type=submit] {
+    background-color: #5E81AC;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    margin: 1rem 0;
+}
+
+#comment-box {
+    width: 100%;
+}
+
+#comments label {
+    font-weight: bold;
+}
+
+#comments ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+#comments li {
+    margin: 15px 0;
+    padding: 20px;
+    background: #e5e9f0;
+}
+
+#comments li h5 {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+}
+
+#comments li p {
+    margin: 5px 0;
+    padding: 0;
+    font-size: 1.2rem;
+}
+
+#comments li h6 {
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 
 footer {

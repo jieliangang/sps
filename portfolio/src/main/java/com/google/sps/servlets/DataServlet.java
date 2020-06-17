@@ -14,23 +14,39 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.*;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
+/** Servlet that handles fetching and posting of comments */
+@WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
-  private List<String> comments = new ArrayList<>();;
+  DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Query query = new Query("Comment").addSort("timestamp", Query.SortDirection.DESCENDING);
+    PreparedQuery results = datastore.prepare(query);
+
+    List<Comment> comments = new ArrayList<>();
+    for(Entity entity: results.asIterable()) {
+        long id = entity.getKey().getId();
+        String username = (String) entity.getProperty("username");
+        String text = (String) entity.getProperty("text");
+        long timestamp = (long) entity.getProperty("timestamp");
+
+        Comment comment = new Comment(id, username, text, timestamp);
+        comments.add(comment);
+    }
+
     String json = convertToJsonUsingGson(comments);
 
     // Send the JSON as the response
@@ -40,27 +56,44 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String comment = getComment(request);
+    Comment comment = getComment(request);
     if(isValidComment(comment)) {
-        comments.add(comment);
+        // Store comment entity in Datastore
+        Entity commentEntity = new Entity("Comment");
+        commentEntity.setProperty("username", comment.getUsername());
+        commentEntity.setProperty("text", comment.getText());
+        commentEntity.setProperty("timestamp", comment.getTimestamp());
+
+        datastore.put(commentEntity);
     }
     response.sendRedirect("/#comments");
   }
 
-  private String convertToJsonUsingGson(List<String> comments) {
+  private String convertToJsonUsingGson(List<Comment> comments) {
     Gson gson = new Gson();
     String json = gson.toJson(comments);
     return json;
   }
 
-  private String getComment(HttpServletRequest request) {
+  private Comment getComment(HttpServletRequest request) {
+      String usernameString = request.getParameter("username");
       String commentString = request.getParameter("comment");
-      return commentString;
+
+      if(usernameString.trim().length() <= 0) {
+          usernameString = "Anonymous";
+      }
+
+      Date date = new Date();
+      long time = date.getTime();
+
+      Comment comment = new Comment(usernameString, commentString, time);
+      return comment;
   }
 
-  private Boolean isValidComment(String comment) {
-      // Check if string is not empty or contains only whitespace
-      return comment.trim().length() > 0;
+  private Boolean isValidComment(Comment comment) {
+      // Check if username and text is not empty or contains only whitespace
+      return comment.getText().trim().length() > 0
+              && comment.getUsername().trim().length() > 0;
   } 
 }
 

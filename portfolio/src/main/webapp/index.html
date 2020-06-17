@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Jie Liang's Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
     <script src="script.js" defer></script>
   </head>
   <body onload="updateJob(0);fetchComments();">
@@ -255,13 +256,14 @@
     </div>
 
     <div id="comments">
-
-        <form action="/data" method="POST"> 
-            <input type="text" name="comment" value=""/>
+        <h1>Comments</h1>
+        <form action="/comments" method="POST">
+            <label>Name</label>
+            <input type="text" name="username" value="" placeholder="Name"/>
+            <label>Comment</label>
+            <input id="comment-box" type="text" name="comment" value="" placeholder="Comment here"/>
             <input type="submit" />
         </form>
-
-        <h1>Comments</h1>
         <ul id="comments-container"></ul>
     </div>
 

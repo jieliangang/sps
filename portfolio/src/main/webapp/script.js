@@ -73,22 +73,35 @@ function updateJob(index) {
  * Fetches comments from the servers and adds them to the DOM.
  */
 async function fetchComments() {
-    const response = await fetch('/data');
+    const response = await fetch('/comments');
     const comments = await response.json();
 
     const commentsContainer = document.getElementById('comments-container');
     commentsContainer.innerHTML = '';
 
     comments.forEach( comment => {
+        const { username, text, timestamp } = comment;
         commentsContainer.appendChild(
-            createListElement(comment)
+            createListElement(username, text, timestamp)
         );
     });
 }
 
 /** Creates an <li> element containing text. */
-function createListElement(text) {
+function createListElement(username, comment, timestamp) {
   const liElement = document.createElement('li');
-  liElement.innerText = text;
+
+  const usernameElement = document.createElement('h5');
+  const commentElement = document.createElement('p');
+  const dateElement = document.createElement('h6');
+  usernameElement.innerText = username;
+  commentElement.innerText = comment;
+  dateElement.innerText = moment(timestamp).fromNow();
+
+  liElement.appendChild(usernameElement);
+  liElement.appendChild(commentElement);
+  liElement.appendChild(dateElement);
+
   return liElement;
 }
+
