@@ -456,6 +456,13 @@ header a:hover {
     display: block;
 }
 
+#comments input[type=file] {
+    padding: 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    display: block;
+}
+
 #comments input[type=submit] {
     background-color: #5E81AC;
     color: white;
@@ -500,6 +507,12 @@ header a:hover {
 #comments li h6 {
     margin-top: 10px;
     margin-bottom: 0px;
+}
+
+#comments img {
+    max-width: 400px;
+    max-height: 300px;
+    object-fit: cover;
 }
 
 footer {
