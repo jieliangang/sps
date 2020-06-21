@@ -14,12 +14,14 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.blobstore.*;
 import com.google.appengine.api.datastore.*;
+import com.google.appengine.api.images.ImagesService;
+import com.google.appengine.api.images.ImagesServiceFactory;
+import com.google.appengine.api.images.ServingUrlOptions;
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +32,12 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
 
   DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+  ImagesService imagesService = ImagesServiceFactory.getImagesService();
+
+  List<String> validFileTypes = new ArrayList<>(
+    Arrays.asList("image/jpeg", "image/png")
+  );
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -42,8 +50,9 @@ public class DataServlet extends HttpServlet {
         String username = (String) entity.getProperty("username");
         String text = (String) entity.getProperty("text");
         long timestamp = (long) entity.getProperty("timestamp");
+        String imageUrl = (String) entity.getProperty("imageUrl");
 
-        Comment comment = new Comment(id, username, text, timestamp);
+        Comment comment = new Comment(id, username, text, timestamp, imageUrl);
         comments.add(comment);
     }
 
@@ -57,13 +66,15 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Comment comment = getComment(request);
-    if(isValidComment(comment)) {
+    if(comment.isValid()) {
         // Store comment entity in Datastore
         Entity commentEntity = new Entity("Comment");
         commentEntity.setProperty("username", comment.getUsername());
         commentEntity.setProperty("text", comment.getText());
         commentEntity.setProperty("timestamp", comment.getTimestamp());
-
+        if(comment.getImageUrl() != null) {
+            commentEntity.setProperty("imageUrl", comment.getImageUrl());
+        }
         datastore.put(commentEntity);
     }
     response.sendRedirect("/#comments");
@@ -85,16 +96,41 @@ public class DataServlet extends HttpServlet {
 
       Date date = new Date();
       long time = date.getTime();
+      String imageUrl = getUploadedImageUrl(request);
 
-      Comment comment = new Comment(usernameString, commentString, time);
+      Comment comment = new Comment(usernameString, commentString, time, imageUrl);
       return comment;
   }
 
-  private Boolean isValidComment(Comment comment) {
-      // Check if username and text is not empty or contains only whitespace
-      return comment.getText().trim().length() > 0
-              && comment.getUsername().trim().length() > 0;
-  } 
+  /** Returns a URL that points to the uploaded image file, or null if the user didn't upload an image file. */
+  private String getUploadedImageUrl(HttpServletRequest request) {
+      Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
+      List<BlobKey> blobKeys = blobs.get("image");
+
+      // User did not submit a file
+      if(blobKeys == null || blobKeys.isEmpty()) {
+          return null;
+      }
+
+      // User can only submit one file from the form
+      BlobKey blobKey = blobKeys.get(0);
+      BlobInfo blobInfo = new BlobInfoFactory().loadBlobInfo(blobKey);
+
+      if (blobInfo.getSize() == 0 || invalidFileType(blobInfo.getContentType())) {
+          blobstoreService.delete(blobKey);
+          return null;
+      }
+
+      ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
+      String url = imagesService.getServingUrl(options);
+
+      return url;
+  }
+
+  /** Check if file sent is an image file (jpeg or png). */
+  private boolean invalidFileType(String type) {
+      return !validFileTypes.contains(type);
+  }
 }
 
 
