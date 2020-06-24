@@ -79,8 +79,6 @@ async function fetchComments() {
     const commentsContainer = document.getElementById('comments-container');
     commentsContainer.innerHTML = '';
 
-    console.log(comments);
-
     comments.forEach( comment => {
         const { username, text, timestamp, imageUrl } = comment;
         commentsContainer.appendChild(
@@ -114,12 +112,12 @@ function createListElement(username, comment, timestamp, imageUrl) {
   return liElement;
 }
 
-/** Get blobstore upload url **/
-async function fetchBlobstoreUrl() {
-    const response = await fetch('/blobstore-upload-url');
-    const commentUploadUrl = await response.text();
+/** Get upload image url for Blobstore **/
+async function fetchImageUploadUrl() {
+    const response = await fetch('/uploadImageUrl');
+    const uploadImageUrl = await response.text();
 
     const commentForm = document.getElementById('my-form');
-    commentForm.action = commentUploadUrl;
+    commentForm.action = uploadImageUrl;
     commentForm.classList.remove('hidden');
 }

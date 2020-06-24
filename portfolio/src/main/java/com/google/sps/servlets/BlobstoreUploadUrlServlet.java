@@ -12,14 +12,14 @@ import java.io.IOException;
 /**
  * Returns URL that allows a user to upload a file to Blobstore.
  */
-@WebServlet("/blobstore-upload-url")
+@WebServlet("/uploadImageUrl")
 public class BlobstoreUploadUrlServlet extends HttpServlet {
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String uploadUrl = blobstoreService.createUploadUrl("/comments");
-        response.setContentType("text/html");
+        response.setContentType("text/plain");
         response.getWriter().println(uploadUrl);
     }
 }
