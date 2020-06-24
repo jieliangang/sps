@@ -43,6 +43,6 @@ public final class Comment {
     /** Check if comment is valid. Valid when username is present and contains at least text or image. */
     public boolean isValid() {
         return username.trim().length() > 0 &&
-                (text.trim().length() > 0 || !imageUrl.isEmpty());
+                (text.trim().length() > 0 || imageUrl != null);
     }
 }
