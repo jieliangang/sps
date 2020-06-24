@@ -114,7 +114,7 @@ function createListElement(username, comment, timestamp, imageUrl) {
 
 /** Get upload image url for Blobstore **/
 async function fetchImageUploadUrl() {
-    const response = await fetch('/uploadImageUrl');
+    const response = await fetch('/upload-image-url');
     const uploadImageUrl = await response.text();
 
     const commentForm = document.getElementById('my-form');
