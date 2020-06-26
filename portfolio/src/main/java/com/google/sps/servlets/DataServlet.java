@@ -35,9 +35,7 @@ public class DataServlet extends HttpServlet {
   BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
   ImagesService imagesService = ImagesServiceFactory.getImagesService();
 
-  List<String> validFileTypes = new ArrayList<>(
-    Arrays.asList("image/jpeg", "image/png")
-  );
+  List<String> validFileTypes = Arrays.asList("image/jpeg", "image/png");
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
