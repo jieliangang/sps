@@ -80,28 +80,44 @@ async function fetchComments() {
     commentsContainer.innerHTML = '';
 
     comments.forEach( comment => {
-        const { username, text, timestamp } = comment;
+        const { username, text, timestamp, imageUrl } = comment;
         commentsContainer.appendChild(
-            createListElement(username, text, timestamp)
+            createListElement(username, text, timestamp, imageUrl)
         );
     });
 }
 
 /** Creates an <li> element containing text. */
-function createListElement(username, comment, timestamp) {
+function createListElement(username, comment, timestamp, imageUrl) {
   const liElement = document.createElement('li');
 
   const usernameElement = document.createElement('h5');
   const commentElement = document.createElement('p');
   const dateElement = document.createElement('h6');
+  const imgElement = document.createElement('img');
   usernameElement.innerText = username;
   commentElement.innerText = comment;
   dateElement.innerText = moment(timestamp).fromNow();
 
   liElement.appendChild(usernameElement);
   liElement.appendChild(commentElement);
+
+  if(imageUrl) {
+    imgElement.src = imageUrl;
+    liElement.appendChild(imgElement);
+  }
+
   liElement.appendChild(dateElement);
 
   return liElement;
 }
 
+/** Get upload image url for Blobstore **/
+async function fetchImageUploadUrl() {
+    const response = await fetch('/upload-image-url');
+    const uploadImageUrl = await response.text();
+
+    const commentForm = document.getElementById('my-form');
+    commentForm.action = uploadImageUrl;
+    commentForm.classList.remove('hidden');
+}
