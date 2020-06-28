@@ -14,6 +14,7 @@
 
 package com.google.sps;
 
+import java.sql.Time;
 import java.util.*;
 
 public final class FindMeetingQuery {
@@ -25,6 +26,14 @@ public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
 
     Collection<TimeRange> availableTimes = new ArrayList<>();
+    // Handle invalid request duration and no attendees edge case in request
+    if(request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
+      return availableTimes;
+    } else if (request.getAttendees().size() == 0) {
+      return Arrays.asList(TimeRange.WHOLE_DAY);
+    }
+
+    // Sort events based on event start time
     List<Event> eventList = new ArrayList<>(events);
     eventList.sort(Comparator.comparingInt(e -> e.getWhen().start()));
 
@@ -37,40 +46,32 @@ public final class FindMeetingQuery {
       }
       int eventStartTime = e.getWhen().start();
       int eventEndTime = e.getWhen().end();
-
       // Check if event overlaps with preceding events
       if(eventStartTime <= prevEndTime) {
         prevEndTime = Math.max(eventEndTime, prevEndTime);
       } else {
-        int timeGap = eventStartTime - prevEndTime;
         // Check if gap between events can hold the meeting duration
-        if(timeGap >= request.getDuration()) {
-          availableTimes.add(TimeRange.fromStartDuration(prevEndTime, timeGap));
-        }
+        checkGap(eventStartTime, prevEndTime, request.getDuration(), availableTimes);
         prevEndTime = eventEndTime;
       }
     }
-
     // Check for the gap after the last event
-    int lastGap = TimeRange.END_OF_DAY + 1 - prevEndTime;
-    if(lastGap >= request.getDuration()) {
-      availableTimes.add(TimeRange.fromStartDuration(prevEndTime, lastGap));
-    }
+    checkGap(TimeRange.END_OF_DAY + 1, prevEndTime, request.getDuration(), availableTimes);
 
     return availableTimes;
   }
 
+  private void checkGap(int startTime, int prevEndTime, long duration, Collection<TimeRange> availableTimes) {
+    int gap = startTime - prevEndTime;
+    if(gap >= duration) {
+      availableTimes.add(TimeRange.fromStartDuration(prevEndTime, gap));
+    }
+  }
+
   /**
-   * Check if {@code event} and {@code request} share any same attendee.
-   * Time complexity of the algorithm is O(n), in which n is the size of attendees in {@code request}
    * Returns true if the attendees overlap.
    */
   private boolean attendeesOverlap(Event event, MeetingRequest request) {
-    for(String attendee: request.getAttendees()) {
-      if(event.getAttendees().contains(attendee)) {
-        return true;
-      }
-    }
-    return false;
+    return !Collections.disjoint(event.getAttendees(), request.getAttendees());
   }
 }
