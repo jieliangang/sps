@@ -90,6 +90,4 @@ public final class FindMeetingQuery {
     // Check for the gap after the last event
     checkGap(TimeRange.END_OF_DAY + 1, prevEndTime, request.getDuration(), availableTimes);
   }
-
-
 }
